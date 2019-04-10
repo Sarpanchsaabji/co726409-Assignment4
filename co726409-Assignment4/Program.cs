@@ -25,12 +25,14 @@ namespace ConsoleApp1
         public void ReadTextFiles()
         {
 
-            using (StreamReader sr = new StreamReader("U:/Users/727454/Beowulf.txt"))
+            using (StreamReader sr = new StreamReader("U:/Users/726409/Beowulf.txt"))
             {
                 string line;
                 int counter = 0;
                 int a = 0, myWord = 1;
+                float averageLetterPerWord;
                 ArrayList lineNumbers = new ArrayList();
+                ArrayList lineNumbers2 = new ArrayList();
                 int linenum = 1;
                 lineNumbers.Add(22);
 
@@ -41,9 +43,20 @@ namespace ConsoleApp1
                     FindNumberOfBlankSpaces(line);
                     counter++;
 
-                    if (line.Substring(0).Contains("sea") && line.Substring(0).Contains("fare"))
+                    // SECTION C
+                    if (line.Substring(0).Contains("Sea") || line.Substring(0).Contains("sea") && line.Substring(0).Contains("Fare") || line.Substring(0).Contains("fare"))
                     {
                         lineNumbers.Add(linenum);
+                    }
+
+                    // SECTION D
+                    if (line.Substring(0).Contains("fare") || line.Substring(0).Contains("Fare"))
+                    {
+                        if (!(line.Substring(0).Contains("war") || line.Substring(0).Contains("War")))
+                        {
+                            lineNumbers2.Add(linenum);
+                        }
+
                     }
 
                     // COUNTING THE NUMBER OF WORDS  SECTION B
@@ -59,19 +72,29 @@ namespace ConsoleApp1
 
                     linenum++;  // SECTION C
                 }
-
+                // COUNTING THE NUMBER OF AVERAGE LETTERS IN WORD SECTION E
+                averageLetterPerWord = counterletters / countSpaces;
 
                 // SECTION A: NUMBER OF LINES
-                Console.WriteLine("\nLine" + counter);
-                Console.WriteLine("Word " + myWord);
+                Console.WriteLine("\n\n\n\n********************************\n The number of lines " + counter);
+                Console.WriteLine("The number of words " + myWord);
+                Console.WriteLine("The number of average letters per word is  " + averageLetterPerWord);
 
 
                 // SECTION C: WORDS WHICH CONTAINS BOTH SEA AND FARE
-                Console.WriteLine("Section\n");
+                Console.WriteLine("The line which contains both sea and fare\n");
                 foreach (int i in lineNumbers)
                 {
                     Console.Write(i + " ");
                 }
+
+                // SECTION C: WORDS WHICH CONTAINS BOTH SEA AND FARE
+                Console.WriteLine("The line which contains Fare, but not War\n");
+                foreach (int i in lineNumbers2)
+                {
+                    Console.Write(i + " ");
+                }
+
                 Console.ReadLine();
             }
 
