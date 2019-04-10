@@ -25,11 +25,14 @@ namespace ConsoleApp1
         public void ReadTextFiles()
         {
 
-            using (StreamReader sr = new StreamReader("U:/Users/726409/Beowulf.txt"))
+            using (StreamReader sr = new StreamReader("U:/Users/727454/Beowulf.txt"))
             {
                 string line;
                 int counter = 0;
                 int a = 0, myWord = 1;
+                ArrayList lineNumbers = new ArrayList();
+                int linenum = 1;
+                lineNumbers.Add(22);
 
                 while ((line = sr.ReadLine()) != null)
                 {
@@ -38,6 +41,12 @@ namespace ConsoleApp1
                     FindNumberOfBlankSpaces(line);
                     counter++;
 
+                    if (line.Substring(0).Contains("sea") && line.Substring(0).Contains("fare"))
+                    {
+                        lineNumbers.Add(linenum);
+                    }
+
+                    // COUNTING THE NUMBER OF WORDS  SECTION B
                     while (a <= line.Length - 1)
                     {
                         if (line[a] == ' ' || line[a] == '\n' || line[a] == '\t')
@@ -48,19 +57,27 @@ namespace ConsoleApp1
                     }
                     a = 0;
 
+                    linenum++;  // SECTION C
                 }
 
 
-                Console.WriteLine("Line " + counter);
-                Console.WriteLine("Word" + myWord);
+                // SECTION A: NUMBER OF LINES
+                Console.WriteLine("\nLine" + counter);
+                Console.WriteLine("Word " + myWord);
+
+
+                // SECTION C: WORDS WHICH CONTAINS BOTH SEA AND FARE
+                Console.WriteLine("Section\n");
+                foreach (int i in lineNumbers)
+                {
+                    Console.Write(i + " ");
+                }
                 Console.ReadLine();
             }
 
         }
         public int FindNumberOfBlankSpaces(string line)
         {
-
-
             foreach (char c in line)
             {
                 if (char.IsLetter(c)) { counterletters++; }
